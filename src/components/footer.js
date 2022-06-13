@@ -1,15 +1,9 @@
 import * as React from "react"
-import PropTypes from "prop-types"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import { 
-  Logo, 
-  Header as HeaderStyled,
-  List,
-  Wrapper,
-  Nav
-} from "./headerView"
+import { Footer as FooterStyled, List } from "./footerView"
+import {Logo, Wrapper, Nav} from './headerView'
 
-const Header = ({ siteTitle }) => {
+const Footer = () => {
   const result = useStaticQuery(graphql`
     {
       prismicNavigation {
@@ -26,9 +20,9 @@ const Header = ({ siteTitle }) => {
   `)
 
   return (
-    <HeaderStyled.Section>
+    <FooterStyled.Section>
       <Wrapper>
-          <HeaderStyled.Inner>
+          <FooterStyled.Inner>
               <Logo><Link to="/">Escape.</Link></Logo>
               <Nav>
                 <List>
@@ -36,18 +30,10 @@ const Header = ({ siteTitle }) => {
                   {result.prismicNavigation.data.menu_items.map(item => <Link to={`/${item.destination_page.uid}`} key={item.destination_page.uid}>{item.label}</Link>)}
                 </List>
               </Nav>
-            </HeaderStyled.Inner>
+            </FooterStyled.Inner>
         </Wrapper>
-    </HeaderStyled.Section>
+    </FooterStyled.Section>
   )
 }
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
+export default Footer

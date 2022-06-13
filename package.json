@@ -5,19 +5,28 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@formspree/react": "^2.2.5",
+    "@prismicio/react": "^2.4.2",
+    "babel-plugin-styled-components": "^2.0.7",
+    "dotenv": "^16.0.1",
     "gatsby": "^4.16.0",
+    "gatsby-background-image": "^1.6.0",
     "gatsby-plugin-gatsby-cloud": "^4.16.0",
     "gatsby-plugin-image": "^2.16.1",
     "gatsby-plugin-manifest": "^4.16.0",
     "gatsby-plugin-offline": "^5.16.0",
     "gatsby-plugin-react-helmet": "^5.16.0",
     "gatsby-plugin-sharp": "^4.16.1",
+    "gatsby-plugin-styled-components": "^5.16.0",
     "gatsby-source-filesystem": "^4.16.0",
+    "gatsby-source-prismic": "^5.2.7",
     "gatsby-transformer-sharp": "^4.16.0",
+    "gbimage-bridge": "^0.2.1",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "prettier": "^2.6.2"

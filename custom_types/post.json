@@ -1,0 +1,79 @@
+{
+  "Main" : {
+    "uid" : {
+      "type" : "UID",
+      "config" : {
+        "label" : "uid"
+      }
+    },
+    "destination_page" : {
+      "type" : "Link",
+      "config" : {
+        "select" : "document",
+        "customtypes" : [ "page" ],
+        "label" : "destination page"
+      }
+    },
+    "post_image" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "post image"
+      }
+    },
+    "title" : {
+      "type" : "StructuredText",
+      "config" : {
+        "single" : "heading1,heading2,heading3,heading4,heading5,heading6",
+        "label" : "title"
+      }
+    },
+    "subtitle" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "paragraph",
+        "label" : "subtitle"
+      }
+    },
+    "avatar" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : {
+          "width" : 26,
+          "height" : 26
+        },
+        "thumbnails" : [ ],
+        "label" : "avatar"
+      }
+    },
+    "author" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "paragraph",
+        "label" : "author"
+      }
+    },
+    "date" : {
+      "type" : "Date",
+      "config" : {
+        "label" : "date"
+      }
+    },
+    "categories" : {
+      "type" : "Select",
+      "config" : {
+        "options" : [ "Nature", "Photography", "Relaxation", "Vacation", "Travel", "Adventure" ],
+        "default_value" : "Nature",
+        "label" : "categories"
+      }
+    },
+    "content" : {
+      "type" : "StructuredText",
+      "config" : {
+        "multi" : "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+        "label" : "content"
+      }
+    }
+  }
+}

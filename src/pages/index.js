@@ -1,122 +1,162 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-  },
-]
+import { SliceZone } from "@prismicio/react"
 
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
+import { createGlobalStyle } from 'styled-components';
+import { components } from "../slices"
 
-const moreLinks = [
-  { text: "Join us on Discord", url: "https://gatsby.dev/discord" },
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
+const GlobalStyle = createGlobalStyle`
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  body{
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 400;
+    color: #FFFFFF;
+    background-color: #EFEFEF;
+  }
+  p,
+  button{
+    font-family: 'Oxygen';
+    font-style: normal;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+  }
+`;
 
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
+export const query = graphql`
+  {
+    prismicHomepage {
+      data {
+        body {
+          ... on PrismicHomepageDataBodyCategories {
+            id
+            slice_type
+            items {
+              label
+              destination_page {
+                uid
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyContacts {
+            id
+            slice_type
+            primary {
+              title {
+                richText
+              }
+              background_image {
+                gatsbyImageData
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyMostRecent {
+            id
+            primary {
+              title {
+                richText
+              }
+            }
+            slice_type
+            items {
+              destination_post {
+                document {
+                  ... on PrismicPost {
+                    uid
+                    id
+                    data {
+                      author {
+                        richText
+                      }
+                      avatar {
+                        gatsbyImageData
+                      }
+                      post_image {
+                        gatsbyImageData
+                      }
+                      subtitle {
+                        richText
+                      }
+                      title {
+                        richText
+                      }
+                      date
+                      destination_page{
+                        uid
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyFeaturedPosts {
+            id
+            slice_type
+            primary {
+              title {
+                richText
+              }
+            }
+            items {
+              title {
+                richText
+              }
+              subtitle {
+                richText
+              }
+              has_a_button
+              date(formatString: "LL")
+              background_image {
+                gatsbyImageData
+              }
+              avatar {
+                gatsbyImageData
+              }
+              author {
+                richText
+              }
+            }
+          }
+          ... on PrismicHomepageDataBodyHero {
+            id
+            slice_type
+            primary {
+              background_image {
+                gatsbyImageData
+              }
+              title {
+                richText
+              }
+              subtitle {
+                richText
+              }
+              destination_page {
+                uid
+              }
+              destination_label_text
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
-const IndexPage = () => (
-  <Layout>
-    <Seo title="Home" />
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
-    </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+const IndexPage = (props) => {
+  return (
+    <Layout>
+      <SliceZone slices={props.data.prismicHomepage.data.body} components={components} />
+      <GlobalStyle />
+    </Layout>
+  )
+}
 
 export default IndexPage
